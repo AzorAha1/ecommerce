@@ -41,33 +41,32 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Row(
-            children: [
-              SizedBox(
-                width: 100,
-              ),
-              InkWell(
-                child: Icon(Icons.search),
-              ),
-              Expanded(
-                  child: Padding(
-                padding: const EdgeInsets.only(
-                  right: 100,
-                  left: 10,
-                ),
-                child: TextField(
-                  decoration: InputDecoration(hintText: 'Search Items'),
-                ),
-              ))
-            ],
-          ),
-        
-            
+      body: SingleChildScrollView(
+        child: Column(
           
-          Expanded(
-            child: Row(
+          children: [
+            Row(
+              children: [
+                SizedBox(
+                  width: 100,
+                ),
+                InkWell(
+                  child: Icon(Icons.search),
+                ),
+                Expanded(
+                    child: Padding(
+                  padding: const EdgeInsets.only(
+                    right: 100,
+                    left: 10,
+                  ),
+                  child: TextField(
+                    decoration: InputDecoration(hintText: 'Search Items'),
+                  ),
+                ))
+              ],
+            ),
+            SizedBox(height: 10,),
+            Row(
               children: [
                 Expanded(
                   child: newCard(
@@ -98,14 +97,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-          ),
-          Expanded(
-            child: SizedBox(
+            SizedBox(
               height: 20,
             ),
-          ),
-          Expanded(
-            child: Row(
+            Row(
               children: [
                 Expanded(
                   child: newCard(
@@ -116,59 +111,59 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                 ),
+                Expanded(
+                  child: newCard(
+                    image: 'mic.png',
+                    nametext: 'Mic',
+                    onpress: () {
+                      Navigator.pushNamed(context, '/buypage');
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: newCard(
+                    image: 'monitor.png',
+                    nametext: 'Monitor',
+                    onpress: () {
+                      Navigator.pushNamed(context, '/buypage');
+                    },
+                  ),
+                )
               ],
             ),
-          ),
-          // Expanded(
-          //   child: GridView.count(
-          //     crossAxisCount: 3,
-          //     children: [
-          //       newCard(
-          //         image: 'copier.png',
-          //         nametext: 'Photo-Copier',
-          //         onpress: () {
-          //           Navigator.pushNamed(context, '/buypage');
-          //         },
-          //       ),
-          //       newCard(
-          //         image: 'headset.png',
-          //         nametext: 'Headset',
-          //         onpress: () {
-          //           Navigator.pushNamed(context, '/buypage');
-          //         },
-          //       ),
-          //       newCard(
-          //         image: 'keyboard.png',
-          //         nametext: 'Keyboard',
-          //         onpress: () {
-          //           Navigator.pushNamed(context, '/buypage');
-          //         },
-          //       ),
-          //       newCard(
-          //         image: 'mic.png',
-          //         nametext: 'Mic',
-          //         onpress: () {
-          //           Navigator.pushNamed(context, '/buypage');
-          //         },
-          //       ),
-          //       newCard(
-          //         image: 'monitor.png',
-          //         nametext: 'Monitor',
-          //         onpress: () {
-          //           Navigator.pushNamed(context, '/buypage');
-          //         },
-          //       ),
-          //       newCard(
-          //         image: 'mouse.png',
-          //         nametext: 'Mouse',
-          //         onpress: () {
-          //           Navigator.pushNamed(context, '/buypage');
-          //         },
-          //       ),
-          //     ],
-          //   ),
-          // ),
-        ],
+             Row(
+              children: [
+                Expanded(
+                  child: newCard(
+                    image: 'keyboard.png',
+                    nametext: 'Keyboard',
+                    onpress: () {
+                      Navigator.pushNamed(context, '/buypage');
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: newCard(
+                    image: 'mic.png',
+                    nametext: 'Mic',
+                    onpress: () {
+                      Navigator.pushNamed(context, '/buypage');
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: newCard(
+                    image: 'monitor.png',
+                    nametext: 'Monitor',
+                    onpress: () {
+                      Navigator.pushNamed(context, '/buypage');
+                    },
+                  ),
+                )
+              ],
+            ),
+          ]
+        ),
       ),
     );
   }
@@ -188,40 +183,36 @@ class _newCardState extends State<newCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+      padding: EdgeInsets.only(left: 20, right: 20),
       child: MaterialButton(
-        color: Colors.white10,
+        height: 300,
+        color: Colors.white,
         onPressed: widget.onpress,
-        child: Column(children: [
-          Expanded(
-            child: Card(
-              child: Image.asset(
-                'assets/items/${widget.image}',
-                height: 400,
-                width: 200,
-              ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+          Card(
+            child: Image.asset(
+              'assets/items/${widget.image}',
+              height: 100,
+              width: 200,
             ),
           ),
-          Expanded(
-            child: Divider(
-              indent: 15,
-              endIndent: 15,
-              thickness: 0.85,
-            ),
+          Divider(
+            indent: 15,
+            endIndent: 15,
+            thickness: 0.85,
           ),
-          Expanded(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            
             children: [
-              Expanded(
-                flex: 1,
-                child: Text(
-                  '${widget.nametext}',
-                  style: GoogleFonts.aBeeZee(fontWeight: FontWeight.bold),
-                ),
-              ),
+          Text(
+            '${widget.nametext}',
+            style: GoogleFonts.aBeeZee(fontWeight: FontWeight.bold),
+          ),
             ],
-          )),
+          ),
         ]),
       ),
     );
