@@ -1,3 +1,4 @@
+import 'package:ecommerce/buyitempage.dart';
 import 'package:ecommerce/homepage.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,11 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage(),
+      initialRoute: '/',
+      routes: {
+        '/':(context) => const HomePage(),
+        '/buypage':(context) => const BuyPage(),
+      },
     );
   }
 }

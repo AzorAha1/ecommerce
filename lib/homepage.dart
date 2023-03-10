@@ -53,47 +53,121 @@ class _HomePageState extends State<HomePage> {
               ),
               Expanded(
                   child: Padding(
-                padding: const EdgeInsets.only(right: 100, left: 10),
+                padding: const EdgeInsets.only(
+                  right: 100,
+                  left: 10,
+                ),
                 child: TextField(
                   decoration: InputDecoration(hintText: 'Search Items'),
                 ),
               ))
             ],
           ),
-          SizedBox(
-            height: 10,
-          ),
+        
+            
+          
           Expanded(
-            child: GridView.count(
-              crossAxisCount: 3,
+            child: Row(
               children: [
-                newCard(
-                  image: 'copier.png',
-                  nametext: 'Photo-Copier',
+                Expanded(
+                  child: newCard(
+                    image: 'copier.png',
+                    nametext: 'Photo-Copier',
+                    onpress: () {
+                      Navigator.pushNamed(context, '/buypage');
+                    },
+                  ),
                 ),
-                newCard(
-                  image: 'headset.png',
-                  nametext: 'Headset',
+                Expanded(
+                  child: newCard(
+                    image: 'headset.png',
+                    nametext: 'Headset',
+                    onpress: () {
+                      Navigator.pushNamed(context, '/buypage');
+                    },
+                  ),
                 ),
-                newCard(
-                  image: 'keyboard.png',
-                  nametext: 'Keyboard',
-                ),
-                newCard(
-                  image: 'mic.png',
-                  nametext: 'Mic',
-                ),
-                newCard(
-                  image: 'monitor.png',
-                  nametext: 'Monitor',
-                ),
-                newCard(
-                  image: 'mouse.png',
-                  nametext:'Mouse',
+                Expanded(
+                  child: newCard(
+                    image: 'keyboard.png',
+                    nametext: 'Keyboard',
+                    onpress: () {
+                      Navigator.pushNamed(context, '/buypage');
+                    },
+                  ),
                 ),
               ],
             ),
           ),
+          Expanded(
+            child: SizedBox(
+              height: 20,
+            ),
+          ),
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: newCard(
+                    image: 'keyboard.png',
+                    nametext: 'Keyboard',
+                    onpress: () {
+                      Navigator.pushNamed(context, '/buypage');
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Expanded(
+          //   child: GridView.count(
+          //     crossAxisCount: 3,
+          //     children: [
+          //       newCard(
+          //         image: 'copier.png',
+          //         nametext: 'Photo-Copier',
+          //         onpress: () {
+          //           Navigator.pushNamed(context, '/buypage');
+          //         },
+          //       ),
+          //       newCard(
+          //         image: 'headset.png',
+          //         nametext: 'Headset',
+          //         onpress: () {
+          //           Navigator.pushNamed(context, '/buypage');
+          //         },
+          //       ),
+          //       newCard(
+          //         image: 'keyboard.png',
+          //         nametext: 'Keyboard',
+          //         onpress: () {
+          //           Navigator.pushNamed(context, '/buypage');
+          //         },
+          //       ),
+          //       newCard(
+          //         image: 'mic.png',
+          //         nametext: 'Mic',
+          //         onpress: () {
+          //           Navigator.pushNamed(context, '/buypage');
+          //         },
+          //       ),
+          //       newCard(
+          //         image: 'monitor.png',
+          //         nametext: 'Monitor',
+          //         onpress: () {
+          //           Navigator.pushNamed(context, '/buypage');
+          //         },
+          //       ),
+          //       newCard(
+          //         image: 'mouse.png',
+          //         nametext: 'Mouse',
+          //         onpress: () {
+          //           Navigator.pushNamed(context, '/buypage');
+          //         },
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );
@@ -102,8 +176,9 @@ class _HomePageState extends State<HomePage> {
 
 class newCard extends StatefulWidget {
   String? image;
-  newCard({this.image, this.nametext});
+  newCard({this.image, this.nametext, @required this.onpress});
   String? nametext;
+  Function()? onpress;
 
   @override
   State<newCard> createState() => _newCardState();
@@ -112,68 +187,117 @@ class newCard extends StatefulWidget {
 class _newCardState extends State<newCard> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-            height: 200,
-            width: 300,
-            decoration: BoxDecoration(),
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+      child: MaterialButton(
+        color: Colors.white10,
+        onPressed: widget.onpress,
+        child: Column(children: [
+          Expanded(
             child: Card(
-              color: Colors.white,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Image.asset(
-                    'assets/items/${widget.image}',
-                    height: 80,
-                    width: 200,
-                  ),
-                  Divider(
-                    indent: 15,
-                    endIndent: 15,
-                    thickness: 0.85,
-                  ),
-                  Text(
-                    '${widget.nametext}',
-                    style: GoogleFonts.aBeeZee(fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      InkWell(
-                          child: Icon(
-                        Icons.star,
-                        color: Colors.red,
-                      )),
-                      Text('4.5'),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text('2 ratings'),
-                      SizedBox(
-                        height: 30,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                            text: '\$ ', style: TextStyle(color: Colors.green)),
-                        TextSpan(text: '50', style: TextStyle(fontSize: 20)),
-                      ],
-                    ),
-                  )
-                ],
+              child: Image.asset(
+                'assets/items/${widget.image}',
+                height: 400,
+                width: 200,
               ),
-            )),
-      ],
+            ),
+          ),
+          Expanded(
+            child: Divider(
+              indent: 15,
+              endIndent: 15,
+              thickness: 0.85,
+            ),
+          ),
+          Expanded(
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(
+                flex: 1,
+                child: Text(
+                  '${widget.nametext}',
+                  style: GoogleFonts.aBeeZee(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          )),
+        ]),
+      ),
     );
   }
 }
+
+
+// SingleChildScrollView(
+//       child: Column(
+//         children: [
+//           MaterialButton(
+//             minWidth: 200,
+//             height: 200,
+//             onPressed: widget.onpress,
+//             child: Container(
+//                 height: 200,
+//                 width: 300,
+//                 decoration: BoxDecoration(),
+//                 child: Card(
+//                   color: Color.fromARGB(255, 247, 245, 245),
+//                   child: Column(
+//                     mainAxisAlignment: MainAxisAlignment.start,
+//                     children: [
+//                       Image.asset(
+                        
+//                         'assets/items/${widget.image}',
+//                         height: 80,
+//                         width: 200,
+//                         color: Colors.white,
+//                       ),
+//                       Divider(
+//                         indent: 15,
+//                         endIndent: 15,
+//                         thickness: 0.85,
+//                       ),
+//                       Text(
+//                         '${widget.nametext}',
+//                         style: GoogleFonts.aBeeZee(fontWeight: FontWeight.bold),
+//                       ),
+//                       
+//                       Row(
+                      
+//                         mainAxisAlignment: MainAxisAlignment.center,
+//                         children: [
+//                           InkWell(
+//                               child: Icon(
+//                             Icons.star,
+//                             color: Colors.red,
+//                           )),
+//                           Text('4.5'),
+//                           SizedBox(
+//                             width: 10,
+//                           ),
+//                           Text('2 ratings'),
+//                           SizedBox(
+//                             height: 30,
+//                           ),
+//                         ],
+//                       ),
+//                       SizedBox(
+//                         height: 10,
+//                       ),
+//                       RichText(
+//                         text: TextSpan(
+//                           children: [
+//                             TextSpan(
+//                                 text: '\$ ',
+//                                 style: TextStyle(color: Colors.green)),
+//                             TextSpan(text: '50', style: TextStyle(fontSize: 20)),
+//                           ],
+//                         ),
+//                       )
+//                     ],
+//                   ),
+//                 )),
+//           ),
+//         ],
+//       ),
+//     );
