@@ -21,7 +21,7 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/',
       routes: {
         '/':(context) => const HomePage(),
-        '/buypage':(context) => const BuyPage(),
+        '/buypage':(context) =>  BuyPage(),
       },
     );
   }
