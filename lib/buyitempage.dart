@@ -134,15 +134,14 @@ class _BuyPageState extends State<BuyPage> {
                               Expanded(
                                   child: Text(
                                       'Purchased item on 10th March, 2023')),
-                              
                               InkWell(
                                 onTap: () {
-                                  
+                                  Navigator.pushNamed(context, '/review');
                                 },
                                 child: Text(
                                   'Leave a Review',
-                                  style: GoogleFonts.aBeeZee(
-                                      color: Colors.green),
+                                  style:
+                                      GoogleFonts.aBeeZee(color: Colors.green),
                                 ),
                               ),
                             ],
@@ -215,7 +214,10 @@ class _BuyPageState extends State<BuyPage> {
                               Expanded(
                                 flex: 1,
                                 child: MaterialButton(
-                                  child: Text('Add to Cart',style: TextStyle(color: Colors.white),),
+                                  child: Text(
+                                    'Add to Cart',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                   minWidth: 100,
                                   onPressed: () {},
                                   color: Colors.black,
