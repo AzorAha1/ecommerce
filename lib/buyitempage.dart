@@ -28,6 +28,7 @@ class _BuyPageState extends State<BuyPage> {
         ),
         actions: [
           InkWell(
+            onTap: () => Navigator.pushNamed(context, '/shoppingcart'),
             child: Icon(Icons.shopping_cart),
           ),
           Padding(
@@ -158,47 +159,7 @@ class _BuyPageState extends State<BuyPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('Quantity'),
-                              Container(
-                                height: 30,
-                                width: 70,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 5, vertical: 5),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                    border: Border.all(color: Colors.red)),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    InkWell(
-                                        onTap: () {
-                                          setState(() {
-                                            if (quantitynum != 0) {
-                                              quantitynum -= 1;
-                                            }
-                                          });
-                                        },
-                                        child: Icon(
-                                          Icons.remove,
-                                          size: 11,
-                                        )),
-                                    Text(quantitynum.toString()),
-                                    InkWell(
-                                      child: Icon(
-                                        Icons.add,
-                                        size: 11,
-                                      ),
-                                      onTap: () {
-                                        if (quantitynum < 10) {
-                                          setState(() {
-                                            quantitynum += 1;
-                                          });
-                                        }
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              Addandsub(),
                             ],
                           ),
                           SizedBox(
@@ -234,6 +195,59 @@ class _BuyPageState extends State<BuyPage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class Addandsub extends StatefulWidget {
+  const Addandsub({super.key});
+
+  @override
+  State<Addandsub> createState() => _AddandsubState();
+}
+
+class _AddandsubState extends State<Addandsub> {
+  int quantitynum = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 30,
+      width: 70,
+      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.red)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          InkWell(
+              onTap: () {
+                setState(() {
+                  if (quantitynum != 0) {
+                    quantitynum -= 1;
+                  }
+                });
+              },
+              child: Icon(
+                Icons.remove,
+                size: 11,
+              )),
+          Text(quantitynum.toString()),
+          InkWell(
+            child: Icon(
+              Icons.add,
+              size: 11,
+            ),
+            onTap: () {
+              if (quantitynum < 10) {
+                setState(() {
+                  quantitynum += 1;
+                });
+              }
+            },
+          ),
+        ],
       ),
     );
   }

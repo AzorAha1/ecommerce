@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "318663311492",
+    "project_id": "lifematch-830a9",
+    "storage_bucket": "lifematch-830a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:318663311492:android:97c441986a76765da042d1",
+        "android_client_info": {
+          "package_name": "com.faiz.lifematch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "318663311492-7nka0truq4ql1tlgf4k0suu3kju1r6kf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfAO2COq9M8HZbZvJd4G4syHrQZrkBvvk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "318663311492-7nka0truq4ql1tlgf4k0suu3kju1r6kf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

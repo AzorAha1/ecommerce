@@ -37,6 +37,8 @@ dependencies:
   flutter_layout_grid: ^2.0.1
   line_icons: ^2.0.0
   google_fonts:
+  firebase_core: ^2.7.1
+  firebase_auth: ^4.2.10
   
 
   

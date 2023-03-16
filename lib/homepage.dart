@@ -26,11 +26,13 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           InkWell(
+            onTap: () => Navigator.pushNamed(context, '/shoppingcart'),
             child: Icon(Icons.shopping_cart),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 20, right: 5, left: 20),
             child: InkWell(
+              
               child: Text('Orders'),
             ),
           ),
@@ -374,7 +376,6 @@ class _newCardState extends State<newCard> {
           SizedBox(
             height: 5,
           ),
-          
           Text(
             'Quantity: 5',
             style: TextStyle(fontSize: 10),
