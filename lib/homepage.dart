@@ -1,7 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+dynamic currentuser = FirebaseAuth.instance.currentUser;
+Function()? onpress;
+Widget user({Function()? route1,Function()? route2}) {
+  currentuser = FirebaseAuth.instance.currentUser;
+  if (currentuser != null) {
+    return InkWell(
+      onTap: route1,
+      child: Text('Account'),
+    );
+  } else if (currentuser == null) {
+    return InkWell(
+      child: Text('Sign In'),
+      onTap: route2,
+    );
+  }
+  return currentuser;
+}
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,10 +31,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print(currentuser);
+  }
+
   String previewimage = '';
   String itemname = '';
   String star_rating = '';
   String itemprice = '';
+  bool toggle = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,13 +55,12 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           InkWell(
-            onTap: () => Navigator.pushNamed(context, '/shoppingcart'),
+            onTap: () => context.go('/shoppingcart'),
             child: Icon(Icons.shopping_cart),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 20, right: 5, left: 20),
             child: InkWell(
-              
               child: Text('Orders'),
             ),
           ),
@@ -40,10 +68,8 @@ class _HomePageState extends State<HomePage> {
             width: 10,
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20, right: 40, left: 20),
-            child: InkWell(
-              child: Text('Account'),
-            ),
+            padding: EdgeInsets.only(top: 20,right: 40),
+            child: user(route1: () => context.go('/home') ,route2: () => context.go('/signin'),),
           ),
         ],
       ),
@@ -163,7 +189,14 @@ class _HomePageState extends State<HomePage> {
                           star_rating = '2.8';
                           itemprice = '30';
                         });
-                        Navigator.pushNamed(context, '/buypage', arguments: {
+                        // Navigator.pushNamed(context, '/buypage', arguments: {
+                        //   'previewimage': previewimage,
+                        //   'itemname': itemname,
+                        //   'starrating': star_rating,
+                        //   'itemprice': itemprice
+                        // });
+
+                        context.goNamed('/buypage', queryParams: {
                           'previewimage': previewimage,
                           'itemname': itemname,
                           'starrating': star_rating,
@@ -185,7 +218,7 @@ class _HomePageState extends State<HomePage> {
                           star_rating = '2.8';
                           itemprice = '20';
                         });
-                        Navigator.pushNamed(context, '/buypage', arguments: {
+                        context.go('/buypage', extra: {
                           'previewimage': previewimage,
                           'itemname': itemname,
                           'starrating': star_rating,
@@ -207,12 +240,19 @@ class _HomePageState extends State<HomePage> {
                           star_rating = '2.5';
                           itemprice = '25';
                         });
-                        Navigator.pushNamed(context, '/buypage', arguments: {
+                        context.go('/buypage', extra: {
                           'previewimage': previewimage,
                           'itemname': itemname,
                           'starrating': star_rating,
                           'itemprice': itemprice
                         });
+
+                        // Navigator.pushNamed(context, '/buypage', arguments: {
+                        //   'previewimage': previewimage,
+                        //   'itemname': itemname,
+                        //   'starrating': star_rating,
+                        //   'itemprice': itemprice
+                        // });
                       },
                     ),
                   )
@@ -236,7 +276,7 @@ class _HomePageState extends State<HomePage> {
                           star_rating = '5';
                           itemprice = '70';
                         });
-                        Navigator.pushNamed(context, '/buypage', arguments: {
+                        context.go('/buypage', extra: {
                           'previewimage': previewimage,
                           'itemname': itemname,
                           'starrating': star_rating,
@@ -258,7 +298,7 @@ class _HomePageState extends State<HomePage> {
                           star_rating = '4.5';
                           itemprice = '50';
                         });
-                        Navigator.pushNamed(context, '/buypage', arguments: {
+                        context.go('/buypage', extra: {
                           'previewimage': previewimage,
                           'itemname': itemname,
                           'starrating': star_rating,
@@ -280,7 +320,7 @@ class _HomePageState extends State<HomePage> {
                           star_rating = '3.5';
                           itemprice = '65';
                         });
-                        Navigator.pushNamed(context, '/buypage', arguments: {
+                        context.go('/buypage', extra: {
                           'previewimage': previewimage,
                           'itemname': itemname,
                           'starrating': star_rating,

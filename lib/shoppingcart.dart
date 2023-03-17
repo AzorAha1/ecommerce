@@ -1,5 +1,6 @@
 import 'package:ecommerce/buyitempage.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Shoppingcart extends StatefulWidget {
   const Shoppingcart({super.key});
@@ -36,6 +37,7 @@ class _ShoppingcartState extends State<Shoppingcart> {
               ),
               Column(
                 children: [
+                  
                   Text('Total:\$ 100'),
                   MaterialButton(
                     child: Text(
@@ -45,7 +47,7 @@ class _ShoppingcartState extends State<Shoppingcart> {
                     height: 30,
                     minWidth: 150,
                     onPressed: () {
-                      Navigator.pushNamed(context, '/checkout');
+                      context.go('/checkout');
                     },
                     color: Colors.black,
                   ),

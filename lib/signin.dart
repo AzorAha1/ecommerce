@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Signin extends StatefulWidget {
   const Signin({super.key});
@@ -71,7 +72,7 @@ class _SigninState extends State<Signin> {
           ),
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, '/checkout');
+              context.go('/checkout');
             },
             child: Text(
               "Don't have an Account ? Click to Sign up",

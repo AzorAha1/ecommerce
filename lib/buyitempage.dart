@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BuyPage extends StatefulWidget {
@@ -9,16 +10,16 @@ class BuyPage extends StatefulWidget {
 }
 
 class _BuyPageState extends State<BuyPage> {
-  Map map = {};
+  Map<String, String> map = {};
   int quantitynum = 0;
 
   @override
   Widget build(BuildContext context) {
-    map = ModalRoute.of(context)?.settings.arguments as Map;
-    String previewimage = map['previewimage'];
-    String itemname = map['itemname'];
-    String itemprice = map['itemprice'];
-    String starrating = map['starrating'];
+    
+    String? previewimage = map['previewimage'];
+    String? itemname = map['itemname'];
+    String? itemprice = map['itemprice'];
+    String? starrating = map['starrating'];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -74,7 +75,7 @@ class _BuyPageState extends State<BuyPage> {
                             height: 10,
                           ),
                           Text(
-                            itemname,
+                            itemname!,
                             style: GoogleFonts.aBeeZee(
                                 fontWeight: FontWeight.bold),
                           ),
@@ -91,7 +92,7 @@ class _BuyPageState extends State<BuyPage> {
                               SizedBox(
                                 width: 5,
                               ),
-                              Text(starrating),
+                              Text(starrating!),
                             ],
                           ),
                           SizedBox(
