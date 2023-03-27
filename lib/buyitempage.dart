@@ -1,25 +1,34 @@
+import 'package:ecommerce/homepage.dart';
+import 'package:ecommerce/routing/approute.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class BuyPage extends StatefulWidget {
-  const BuyPage({super.key});
+class BuyPage extends StatelessWidget {
+  BuyPage({
+    super.key,
+    required this.map,
+  });
 
-  @override
-  State<BuyPage> createState() => _BuyPageState();
-}
+  // String previewimage;
+  // String itemname;
+  // String itemprice;
+  // String starrating;
 
-class _BuyPageState extends State<BuyPage> {
-  Map<String, String> map = {};
+  Map map;
+
+  
   int quantitynum = 0;
 
   @override
   Widget build(BuildContext context) {
-    
-    String? previewimage = map['previewimage'];
-    String? itemname = map['itemname'];
-    String? itemprice = map['itemprice'];
-    String? starrating = map['starrating'];
+    var mainimage = map['previewimage'];
+
+    // String? previewimage = map['previewimage'];
+    // String? itemname = map['itemname'];
+    // String? itemprice = map['itemprice'];
+    // String? starrating = map['starrating'];
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -60,7 +69,7 @@ class _BuyPageState extends State<BuyPage> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: Card(
-                      child: Image.asset('assets/items/$previewimage'),
+                      child: Image.asset('assets/items/$mainimage'),
                     ),
                   ),
                 ),
@@ -75,7 +84,7 @@ class _BuyPageState extends State<BuyPage> {
                             height: 10,
                           ),
                           Text(
-                            itemname!,
+                            map['itemname'],
                             style: GoogleFonts.aBeeZee(
                                 fontWeight: FontWeight.bold),
                           ),
@@ -92,7 +101,7 @@ class _BuyPageState extends State<BuyPage> {
                               SizedBox(
                                 width: 5,
                               ),
-                              Text(starrating!),
+                              Text(map['starrating']),
                             ],
                           ),
                           SizedBox(
@@ -114,7 +123,7 @@ class _BuyPageState extends State<BuyPage> {
                                     style: TextStyle(
                                         color: Colors.green, fontSize: 25)),
                                 TextSpan(
-                                    text: '${itemprice}',
+                                    text: map['itemprice'],
                                     style: TextStyle(fontSize: 25)),
                               ],
                             ),
@@ -138,7 +147,7 @@ class _BuyPageState extends State<BuyPage> {
                                       'Purchased item on 10th March, 2023')),
                               InkWell(
                                 onTap: () {
-                                  Navigator.pushNamed(context, '/review');
+                                  context.goNamed(AppRoute.review.name);
                                 },
                                 child: Text(
                                   'Leave a Review',

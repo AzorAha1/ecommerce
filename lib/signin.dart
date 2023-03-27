@@ -1,3 +1,6 @@
+import 'package:ecommerce/routing/approute.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,6 +12,8 @@ class Signin extends StatefulWidget {
 }
 
 class _SigninState extends State<Signin> {
+  String email = '';
+  String password = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +36,11 @@ class _SigninState extends State<Signin> {
               Padding(
                 padding: const EdgeInsets.only(left: 50, right: 50, bottom: 10),
                 child: TextFormField(
+                  onChanged: (value) {
+                    setState(() {
+                      email = value;
+                    });
+                  },
                   decoration: InputDecoration(
                     labelText: 'Email',
                     hintText: 'Email',
@@ -44,6 +54,11 @@ class _SigninState extends State<Signin> {
               Padding(
                 padding: EdgeInsets.only(left: 50, right: 50),
                 child: TextFormField(
+                  onChanged: (value) {
+                    setState(() {
+                      password = value;
+                    });
+                  },
                   decoration: InputDecoration(
                     labelText: 'Password',
                     hintText: 'Password',
@@ -62,17 +77,24 @@ class _SigninState extends State<Signin> {
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: MaterialButton(
-              onPressed: () {},
+              onPressed: () async {
+                dynamic result = await FirebaseAuth.instance
+                    .signInWithEmailAndPassword(
+                        email: email, password: password);
+                if (result != null) {
+                  context.goNamed(AppRoute.home.name);
+                }
+              },
               height: 60,
               minWidth: 200,
               color: Colors.black,
               child:
-                  Text('Create Account', style: TextStyle(color: Colors.white)),
+                  Text('Sign in', style: TextStyle(color: Colors.white)),
             ),
           ),
           InkWell(
             onTap: () {
-              context.go('/checkout');
+              context.goNamed(AppRoute.checkout.name);
             },
             child: Text(
               "Don't have an Account ? Click to Sign up",

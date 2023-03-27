@@ -4,10 +4,86 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ecommerce/routing/approute.dart';
+
+List listofitems = [
+  newCard(
+    onpress: onpress,
+    nametext: 'Photo-Copier',
+    id: '1',
+    image: 'copier.png',
+    price: '50',
+    rating: '2.5',
+  ),
+  newCard(
+    onpress: onpress,
+    nametext: 'Headset',
+    id: '2',
+    image: 'headset.png',
+    price: '14',
+    rating: '2.5',
+  ),
+  newCard(
+    onpress: onpress,
+    nametext: 'Keyboard',
+    id: '3',
+    image: 'keyboard.png',
+    price: '40',
+    rating: '3.5',
+  ),
+  newCard(
+    onpress: onpress,
+    nametext: 'Mic',
+    id: '4',
+    image: 'mic.png',
+    price: '30',
+    rating: '2.8',
+  ),
+  newCard(
+    onpress: onpress,
+    nametext: 'Monitor',
+    id: '5',
+    image: 'monitor.png',
+    price: '20',
+    rating: '2.8',
+  ),
+  newCard(
+    onpress: onpress,
+    nametext: 'Mouse',
+    id: '6',
+    image: 'mouse.png',
+    price: '50',
+    rating: '2.5',
+  ),
+  newCard(
+    onpress: onpress,
+    nametext: 'Printer',
+    id: '7',
+    image: 'printer.png',
+    price: '70',
+    rating: '5.0',
+  ),
+  newCard(
+    onpress: onpress,
+    nametext: 'UPS',
+    id: '8',
+    image: 'ups.png',
+    price: '50',
+    rating: '2.5',
+  ),
+  newCard(
+    onpress: onpress,
+    nametext: 'Battery',
+    id: '9',
+    image: 'battery.png',
+    price: '50',
+    rating: '2.5',
+  ),
+];
 
 dynamic currentuser = FirebaseAuth.instance.currentUser;
 Function()? onpress;
-Widget user({Function()? route1,Function()? route2}) {
+Widget user({Function()? route1, Function()? route2}) {
   currentuser = FirebaseAuth.instance.currentUser;
   if (currentuser != null) {
     return InkWell(
@@ -42,7 +118,7 @@ class _HomePageState extends State<HomePage> {
   String itemname = '';
   String star_rating = '';
   String itemprice = '';
-  bool toggle = false;
+  String id = '';
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +131,7 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           InkWell(
-            onTap: () => context.go('/shoppingcart'),
+            onTap: () => context.goNamed(AppRoute.shoppingcart.name),
             child: Icon(Icons.shopping_cart),
           ),
           Padding(
@@ -68,8 +144,11 @@ class _HomePageState extends State<HomePage> {
             width: 10,
           ),
           Padding(
-            padding: EdgeInsets.only(top: 20,right: 40),
-            child: user(route1: () => context.go('/home') ,route2: () => context.go('/signin'),),
+            padding: EdgeInsets.only(top: 20, right: 40),
+            child: user(
+              route1: () => context.goNamed(AppRoute.home.name),
+              route2: () => context.goNamed(AppRoute.signin.name),
+            ),
           ),
         ],
       ),
@@ -105,67 +184,102 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Expanded(
                     child: newCard(
+                      id: '1',
                       image: 'copier.png',
                       nametext: 'Photo-Copier',
                       rating: '2.5',
                       price: '50',
                       onpress: () {
                         setState(() {
+                          id = '1';
                           previewimage = 'copier.png';
                           itemname = 'Photo-Copier';
                           star_rating = '2.5';
                           itemprice = '50';
                         });
-                        Navigator.pushNamed(context, '/buypage', arguments: {
-                          'previewimage': previewimage,
-                          'itemname': itemname,
-                          'starrating': star_rating,
-                          'itemprice': itemprice
-                        });
+                        // Navigator.pushNamed(context, '/buypage', arguments: {
+                        //   'previewimage': previewimage,
+                        //   'itemname': itemname,
+                        //   'starrating': star_rating,
+                        //   'itemprice': itemprice
+                        // });
+                        try {
+                          context.go('/buypage/$id', extra: {
+                            'id': id,
+                            'previewimage': previewimage,
+                            'itemname': itemname,
+                            'starrating': star_rating,
+                            'itemprice': itemprice,
+                          });
+                        } catch (e) {
+                          print(e.toString());
+                        }
                       },
                     ),
                   ),
                   Expanded(
                     child: newCard(
+                      id: '2',
                       image: 'headset.png',
                       nametext: 'Headset',
                       rating: '2.5',
                       price: '14',
                       onpress: () {
                         setState(() {
+                          id = '2';
                           previewimage = 'headset.png';
                           itemname = 'Headset';
                           star_rating = '2.5';
                           itemprice = '14';
+
+                          try {
+                            context.go('/buypage/$id', extra: {
+                              'id': id,
+                              'previewimage': previewimage,
+                              'itemname': itemname,
+                              'starrating': star_rating,
+                              'itemprice': itemprice,
+                            });
+                          } catch (e) {
+                            print(e.toString());
+                          }
                         });
-                        Navigator.pushNamed(context, '/buypage', arguments: {
-                          'previewimage': previewimage,
-                          'itemname': itemname,
-                          'starrating': star_rating,
-                          'itemprice': itemprice
-                        });
+
+                        // Navigator.pushNamed(context, '/buypage', arguments: {
+                        //   'previewimage': previewimage,
+                        //   'itemname': itemname,
+                        //   'starrating': star_rating,
+                        //   'itemprice': itemprice
+                        // });
                       },
                     ),
                   ),
                   Expanded(
                     child: newCard(
+                      id: '3',
                       image: 'keyboard.png',
                       nametext: 'Keyboard',
                       rating: '3.5',
                       price: '40',
                       onpress: () {
                         setState(() {
+                          id = '3';
                           previewimage = 'keyboard.png';
                           itemname = 'Keyboard';
                           star_rating = '3.5';
                           itemprice = '40';
                         });
-                        Navigator.pushNamed(context, '/buypage', arguments: {
-                          'previewimage': previewimage,
-                          'itemname': itemname,
-                          'starrating': star_rating,
-                          'itemprice': itemprice
-                        });
+                        try {
+                          context.go('/buypage/$id', extra: {
+                            'id': id,
+                            'previewimage': previewimage,
+                            'itemname': itemname,
+                            'starrating': star_rating,
+                            'itemprice': itemprice,
+                          });
+                        } catch (e) {
+                          print(e.toString());
+                        }
                       },
                     ),
                   ),
@@ -178,12 +292,14 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Expanded(
                     child: newCard(
+                      id: '4',
                       image: 'mic.png',
                       nametext: 'Mic',
                       rating: '2.8',
                       price: '30',
                       onpress: () {
                         setState(() {
+                          id = '4';
                           itemname = 'Mic';
                           previewimage = 'mic.png';
                           star_rating = '2.8';
@@ -196,56 +312,75 @@ class _HomePageState extends State<HomePage> {
                         //   'itemprice': itemprice
                         // });
 
-                        context.goNamed('/buypage', queryParams: {
-                          'previewimage': previewimage,
-                          'itemname': itemname,
-                          'starrating': star_rating,
-                          'itemprice': itemprice
-                        });
+                        try {
+                          context.go('/buypage/$id', extra: {
+                            'id': id,
+                            'previewimage': previewimage,
+                            'itemname': itemname,
+                            'starrating': star_rating,
+                            'itemprice': itemprice,
+                          });
+                        } catch (e) {
+                          print(e.toString());
+                        }
                       },
                     ),
                   ),
                   Expanded(
                     child: newCard(
+                      id: '5',
                       image: 'monitor.png',
                       nametext: 'Monitor',
                       rating: '2.8',
                       price: '20',
                       onpress: () {
                         setState(() {
+                          id = '5';
                           itemname = 'Monitor';
                           previewimage = 'monitor.png';
                           star_rating = '2.8';
                           itemprice = '20';
                         });
-                        context.go('/buypage', extra: {
-                          'previewimage': previewimage,
-                          'itemname': itemname,
-                          'starrating': star_rating,
-                          'itemprice': itemprice
-                        });
+                        try {
+                          context.go('/buypage/$id', extra: {
+                            'id': id,
+                            'previewimage': previewimage,
+                            'itemname': itemname,
+                            'starrating': star_rating,
+                            'itemprice': itemprice,
+                          });
+                        } catch (e) {
+                          print(e.toString());
+                        }
                       },
                     ),
                   ),
                   Expanded(
                     child: newCard(
+                      id: '6',
                       image: 'mouse.png',
                       nametext: 'Mouse',
                       rating: '2.5',
                       price: '25',
                       onpress: () {
                         setState(() {
+                          id = '6';
                           previewimage = 'mouse.png';
                           itemname = 'Mouse';
                           star_rating = '2.5';
                           itemprice = '25';
                         });
-                        context.go('/buypage', extra: {
-                          'previewimage': previewimage,
-                          'itemname': itemname,
-                          'starrating': star_rating,
-                          'itemprice': itemprice
-                        });
+                        try {
+                          context.go('/buypage/$id', extra: {
+                            'id': id,
+                            'previewimage': previewimage,
+                            'itemname': itemname,
+                            'starrating': star_rating,
+                            'itemprice': itemprice,
+                          });
+                        } catch (e) {
+                          print(e.toString());
+                        }
 
                         // Navigator.pushNamed(context, '/buypage', arguments: {
                         //   'previewimage': previewimage,
@@ -265,40 +400,50 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Expanded(
                     child: newCard(
+                      id: '7',
                       image: 'printer.png',
                       nametext: 'Printer',
-                      rating: '5',
+                      rating: '5.0',
                       price: '70',
                       onpress: () {
                         setState(() {
+                          id = '7';
                           previewimage = 'printer.png';
                           itemname = 'Printer';
                           star_rating = '5';
                           itemprice = '70';
                         });
-                        context.go('/buypage', extra: {
-                          'previewimage': previewimage,
-                          'itemname': itemname,
-                          'starrating': star_rating,
-                          'itemprice': itemprice
-                        });
+                        try {
+                          context.go('/buypage/$id', extra: {
+                            'id': id,
+                            'previewimage': previewimage,
+                            'itemname': itemname,
+                            'starrating': star_rating,
+                            'itemprice': itemprice,
+                          });
+                        } catch (e) {
+                          print(e.toString());
+                        }
                       },
                     ),
                   ),
                   Expanded(
                     child: newCard(
+                      id: '8',
                       image: 'ups.png',
                       nametext: 'UPS',
                       rating: '4.5',
                       price: '50',
                       onpress: () {
                         setState(() {
+                          id = '8';
                           previewimage = 'ups.png';
                           itemname = 'UPS';
                           star_rating = '4.5';
                           itemprice = '50';
                         });
-                        context.go('/buypage', extra: {
+                        context.go('/buypage/$id', extra: {
+                          'id':id,
                           'previewimage': previewimage,
                           'itemname': itemname,
                           'starrating': star_rating,
@@ -309,23 +454,30 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Expanded(
                     child: newCard(
+                      id: '9',
                       image: 'battery.png',
                       nametext: 'Battery',
                       rating: '3.5',
                       price: '65',
                       onpress: () {
                         setState(() {
+                          id = '9';
                           previewimage = 'battery.png';
                           itemname = 'Battery';
                           star_rating = '3.5';
                           itemprice = '65';
                         });
-                        context.go('/buypage', extra: {
-                          'previewimage': previewimage,
-                          'itemname': itemname,
-                          'starrating': star_rating,
-                          'itemprice': itemprice
-                        });
+                        try {
+                          context.go('/buypage/$id', extra: {
+                            'id': id,
+                            'previewimage': previewimage,
+                            'itemname': itemname,
+                            'starrating': star_rating,
+                            'itemprice': itemprice,
+                          });
+                        } catch (e) {
+                          print(e.toString());
+                        }
                       },
                     ),
                   ),
@@ -338,17 +490,19 @@ class _HomePageState extends State<HomePage> {
 }
 
 class newCard extends StatefulWidget {
+  String id;
   String? image;
   newCard(
       {this.image,
       this.nametext,
+      required this.id,
       @required this.onpress,
-      this.rating,
-      this.price});
+      required this.rating,
+      required this.price});
   String? nametext;
   Function()? onpress;
-  String? rating;
-  String? price;
+  String rating;
+  String price;
 
   @override
   State<newCard> createState() => _newCardState();
@@ -390,7 +544,7 @@ class _newCardState extends State<newCard> {
                     Icons.star,
                     color: Color.fromARGB(255, 241, 230, 132),
                   )),
-                  Text(widget.rating!),
+                  Text(widget.rating.toString()),
                   SizedBox(
                     width: 10,
                   ),
@@ -425,77 +579,3 @@ class _newCardState extends State<newCard> {
     );
   }
 }
-
-
-// SingleChildScrollView(
-//       child: Column(
-//         children: [
-//           MaterialButton(
-//             minWidth: 200,
-//             height: 200,
-//             onPressed: widget.onpress,
-//             child: Container(
-//                 height: 200,
-//                 width: 300,
-//                 decoration: BoxDecoration(),
-//                 child: Card(
-//                   color: Color.fromARGB(255, 247, 245, 245),
-//                   child: Column(
-//                     mainAxisAlignment: MainAxisAlignment.start,
-//                     children: [
-//                       Image.asset(
-                        
-//                         'assets/items/${widget.image}',
-//                         height: 80,
-//                         width: 200,
-//                         color: Colors.white,
-//                       ),
-//                       Divider(
-//                         indent: 15,
-//                         endIndent: 15,
-//                         thickness: 0.85,
-//                       ),
-//                       Text(
-//                         '${widget.nametext}',
-//                         style: GoogleFonts.aBeeZee(fontWeight: FontWeight.bold),
-//                       ),
-//                       
-//                       Row(
-                      
-//                         mainAxisAlignment: MainAxisAlignment.center,
-//                         children: [
-//                           InkWell(
-//                               child: Icon(
-//                             Icons.star,
-//                             color: Colors.red,
-//                           )),
-//                           Text('4.5'),
-//                           SizedBox(
-//                             width: 10,
-//                           ),
-//                           Text('2 ratings'),
-//                           SizedBox(
-//                             height: 30,
-//                           ),
-//                         ],
-//                       ),
-//                       SizedBox(
-//                         height: 10,
-//                       ),
-//                       RichText(
-//                         text: TextSpan(
-//                           children: [
-//                             TextSpan(
-//                                 text: '\$ ',
-//                                 style: TextStyle(color: Colors.green)),
-//                             TextSpan(text: '50', style: TextStyle(fontSize: 20)),
-//                           ],
-//                         ),
-//                       )
-//                     ],
-//                   ),
-//                 )),
-//           ),
-//         ],
-//       ),
-//     );
