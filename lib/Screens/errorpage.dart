@@ -5,6 +5,15 @@ class Errorpage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox();
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+      ),
+      body: Column(
+        children: [
+          Image.asset('assets/items/sadcat.jpg'),
+        ],
+      ),
+    );
   }
 }

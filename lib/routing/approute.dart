@@ -22,7 +22,7 @@ enum AppRoute {
 }
 
 final router = GoRouter(
-  errorBuilder: (context, state) => Errorpage(),
+ 
   initialLocation: '/',
   debugLogDiagnostics: true,
   routes: [
@@ -74,4 +74,5 @@ final router = GoRouter(
         ]),
   
   ],
+  errorBuilder: (context, state) => const Errorpage(),
 );
