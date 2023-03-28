@@ -1,8 +1,29 @@
+import 'dart:js_util';
+
 import 'package:ecommerce/homepage.dart';
 import 'package:ecommerce/routing/approute.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+dynamic currentuser = FirebaseAuth.instance.currentUser;
+
+Widget user({Function()? route1, Function()? route2}) {
+  if (currentuser == null) {
+    return InkWell(
+      child: Text('Sign in'),
+      onTap: route1,
+    );
+  } else if (currentuser != null) {
+    return InkWell(
+      child: Text('Account'),
+      onTap: route2,
+    );
+  }
+  return currentuser;
+}
 
 class BuyPage extends StatelessWidget {
   BuyPage({
@@ -17,7 +38,6 @@ class BuyPage extends StatelessWidget {
 
   Map map;
 
-  
   int quantitynum = 0;
 
   @override
@@ -53,7 +73,10 @@ class BuyPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 20, right: 40, left: 20),
             child: InkWell(
-              child: Text('Account'),
+              child: user(
+                route1: () => context.goNamed(AppRoute.signin.name),
+                route2: ()=> context.goNamed(AppRoute.home.name),
+              ),
             ),
           ),
         ],

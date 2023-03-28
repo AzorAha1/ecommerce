@@ -1,12 +1,15 @@
-import 'package:ecommerce/buyitempage.dart';
-import 'package:ecommerce/checkout.dart';
-import 'package:ecommerce/home.dart';
-import 'package:ecommerce/homepage.dart';
-import 'package:ecommerce/review.dart';
-import 'package:ecommerce/shoppingcart.dart';
-import 'package:ecommerce/signin.dart';
+import 'package:ecommerce/Screens/buyitempage.dart';
+import 'package:ecommerce/Screens/checkout.dart';
+import 'package:ecommerce/Screens/home.dart';
+
+import 'package:ecommerce/Screens/review.dart';
+import 'package:ecommerce/Screens/shoppingcart.dart';
+import 'package:ecommerce/Screens/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ecommerce/Screens/errorpage.dart';
+
+import '../Screens/homepage.dart';
 
 enum AppRoute {
   homepage,
@@ -19,6 +22,7 @@ enum AppRoute {
 }
 
 final router = GoRouter(
+  errorBuilder: (context, state) => Errorpage(),
   initialLocation: '/',
   debugLogDiagnostics: true,
   routes: [
@@ -68,5 +72,6 @@ final router = GoRouter(
             builder: (context, state) => const Home(),
           ),
         ]),
+  
   ],
 );
